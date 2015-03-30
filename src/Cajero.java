@@ -25,6 +25,8 @@ public class Cajero {
         if (objCuenta.getMonto() < doubleCantidadRetirada)
         {
             doubleSaldoTotal = objCuenta.getMonto() - doubleCantidadRetirada;
+            objCuenta.setMonto(doubleSaldoTotal);
+            
             System.out.println("Se han retirado " + doubleCantidadRetirada + " de la cuenta" + "\n Saldo: " + doubleSaldoTotal);
         }
         
@@ -32,5 +34,20 @@ public class Cajero {
         {
             System.err.println("Saldo actual insuficiente para retirar " + doubleCantidadRetirada + " de la cuenta");
         }
+    }
+    
+    public void consignar (Object Cuenta)
+    {
+        String strinCantidadConsignada;
+        double doubleCantidadConsignada, doubleSaldoTotal;
+        Cuenta objCuenta = (Cuenta) Cuenta;
+        
+        strinCantidadConsignada = JOptionPane.showInputDialog("Cuanto desea Consignar");
+        doubleCantidadConsignada = Double.parseDouble(strinCantidadConsignada);
+        
+        doubleSaldoTotal = objCuenta.getMonto() + doubleCantidadConsignada;
+        objCuenta.setMonto(doubleSaldoTotal);
+        
+        System.out.println("Se ha consignado " + doubleCantidadConsignada + " a la cuenta" + "\n Saldo: " + doubleSaldoTotal);
     }
 }
