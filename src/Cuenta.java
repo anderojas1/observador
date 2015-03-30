@@ -14,9 +14,8 @@ public class Cuenta {
     String numeroCuenta = null;
     Cliente persona = null;
     
-    public Cuenta (double monto, String numero, Cliente cliente) {
+    public Cuenta (String numero, Cliente cliente) {
         
-        this.monto = monto;
         numeroCuenta = numero;
         persona = cliente;
         
