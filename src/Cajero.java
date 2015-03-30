@@ -12,42 +12,51 @@
 import javax.swing.*;
 
 public class Cajero {
- 
-    public void retiro (Object Cuenta)
-    {
-        String strinCantidadRetirada;
-        double doubleCantidadRetirada, doubleSaldoTotal;
-        Cuenta objCuenta = (Cuenta) Cuenta;
-        
-        strinCantidadRetirada = JOptionPane.showInputDialog("Cuanto desea Retirar");
-        doubleCantidadRetirada = Double.parseDouble(strinCantidadRetirada);
-        
-        if (objCuenta.getMonto() < doubleCantidadRetirada)
-        {
-            doubleSaldoTotal = objCuenta.getMonto() - doubleCantidadRetirada;
-            objCuenta.setMonto(doubleSaldoTotal);
-            
-            System.out.println("Se han retirado " + doubleCantidadRetirada + " de la cuenta" + "\n Saldo: " + doubleSaldoTotal);
-        }
-        
-        else 
-        {
-            System.err.println("Saldo actual insuficiente para retirar " + doubleCantidadRetirada + " de la cuenta");
-        }
-    }
     
-    public void consignar (Object Cuenta)
-    {
-        String strinCantidadConsignada;
-        double doubleCantidadConsignada, doubleSaldoTotal;
-        Cuenta objCuenta = (Cuenta) Cuenta;
+    static Banco banco = new Banco();
+ 
+    public static void main (String [] args) {
         
-        strinCantidadConsignada = JOptionPane.showInputDialog("Cuanto desea Consignar");
-        doubleCantidadConsignada = Double.parseDouble(strinCantidadConsignada);
+        int opt = 0;
+        int codop = 0;
         
-        doubleSaldoTotal = objCuenta.getMonto() + doubleCantidadConsignada;
-        objCuenta.setMonto(doubleSaldoTotal);
+        do {
+
+            try {
+
+                opt = Integer.parseInt(JOptionPane.showInputDialog("0 - Consignar\n1 - Retirar\n2 - Salir"));
+                
+                switch (opt) {
+
+                    case 0: {
+                        
+                        String numeroCuenta = JOptionPane.showInputDialog("Ingrese el número de cuenta");
+                        double monto = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el monto"));
+                        banco.consignarMonto(numeroCuenta, monto);
+                        
+                    }break;
+                    case 1: {
+                        
+                        String numeroCuenta = JOptionPane.showInputDialog("Ingrese el número de cuenta");
+                        double monto = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el monto"));
+                        codop = banco.retirarMonto(numeroCuenta, monto);
+                        if (codop == -1) System.out.println("saldo insuficiente");
+                        
+                    } break;
+                        
+                    case 2: System.err.println("Hasta luego");break;
+                        
+                    default: JOptionPane.showMessageDialog(null, "Ingrese una opción valida"); break;
+                        
+                }                
+
+            } catch (Exception ex) {
+
+                System.err.println(ex.getMessage());
+                
+            }
+
+        } while (opt != 2);
         
-        System.out.println("Se ha consignado " + doubleCantidadConsignada + " a la cuenta" + "\n Saldo: " + doubleSaldoTotal);
     }
 }

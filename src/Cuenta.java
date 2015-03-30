@@ -10,9 +10,9 @@
  */
 public class Cuenta {
     
-    double monto = 0.0;
-    String numeroCuenta = null;
-    Cliente persona = null;
+    private double monto = 0.0;
+    private String numeroCuenta = null;
+    private Cliente persona = null;
     
     public Cuenta (String numero, Cliente cliente) {
         
@@ -46,5 +46,5 @@ public class Cuenta {
     }
     
     
-    
+
 }
